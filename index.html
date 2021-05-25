@@ -1,0 +1,185 @@
+<!doctype HTML>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<title>Demande de congé</title>
+		<link rel="icon" type="image/png" href="https://leblog92.github.io/ddcf_media/favicon.png" />
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<style>
+			body,html{height:100%;margin:0}
+			body{-webkit-user-select:none;user-select:none;font-size:.8em;font-family:Arial;background:linear-gradient(217deg,rgba(255,0,0,.8),rgba(255,0,0,0) 70.71%),linear-gradient(127deg,rgba(0,255,0,.8),rgba(0,255,0,0) 70.71%),linear-gradient(336deg,rgba(0,0,255,.8),rgba(0,0,255,0) 70.71%);background-attachment:fixed;overflow:hidden}
+			button{width:199px;padding:10px;border-radius:10px}
+			img,svg{-webkit-user-drag:none;user-drag:none}
+			.element{clip-path:inset(0 0 570px 0)}
+			.noPrint{background:rgba(255,255,255,.3);border:1px solid #fff;border-radius:10px;padding:8px;text-align:right;position:fixed;top:8px;left:816px}
+			.red{min-width:.8em;min-height:.8em;border:1px dashed red}
+			#absence{left:408px}
+			#absence{top:195px;position:absolute}
+			#absence2{left:410px}
+			#absence2{top:777px;position:absolute}
+			#canvas,#canvas2{width:253px;height:87px}
+			#canvas{position:absolute;left:18px;top:315px;cursor:crosshair;}
+			#canvas2,#date,#service2{position:absolute}
+			#canvas2{left:15px;top:897px}
+			#cat_pic{width:199px;height:auto;border-radius:10px;transition:1s}
+			#chck{position:fixed;right:0;top:0}
+			#clr:hover{opacity:1}
+			#clr{position:absolute;left:210px;top:410px;opacity:0.5;transition:1s;}
+			#code,#nom,#prenom{left:575px;top:44px;position:absolute;width:188px}
+			#code2,#nom2,#prenom2{left:575px;top:613px;position:absolute}
+			#conge,#observations{position:absolute}
+			#conge{left:187px;top:195px}
+			#conge2,#observations2{position:absolute}
+			#conge2{left:184px;top:777px}
+			#date{left:27px;top:387px;font-size:.8em}
+			#depart,#reprise{width:247px;left:125px;top:148px;position:absolute}
+			#depart2,#reprise2{left:125px;top:729px;position:absolute}
+			#doc,#page,#texture{width:800px;height:1132px}
+			#nom,#prenom{text-transform:uppercase;left:66px;top:122px;width:306px}
+			#nom2,#prenom2{text-transform:uppercase;left:66px;top:703px}
+			#observations{width:750px;height:40px;left:22px;top:230px;line-height:1.6em}
+			#observations2{left:22px;top:816px;line-height:1.6em}
+			#page,#texture{position:absolute}
+			#prenom{width:324px;text-transform:capitalize;left:447px}
+			#prenom2{text-transform:capitalize;left:460px}
+			#progress{color:white;position:fixed;left:0;bottom:22px;height:60px;font-family:Consolas;font-size:50px;border:1px solid white;background:linear-gradient(90deg, rgba(255,255,255,0),rgba(255,255,255,0.9));transition:1s;text-align:center}
+			#reprise{width:271px;left:500px}
+			#reprise2{left:510px}
+			#service{left:545px;top:23px;position:absolute;width:218px}
+			#service2{left:545px;top:593px}
+			#shade{position:fixed;top:0;left:0;width:800px;height:562px;box-shadow:10px 10px 40px rgba(0,0,0,.4)}
+			#texture{opacity:.3}
+			#texture{top:0;left:0}
+			#visuel{transition:2s;position:absolute;right:0;bottom:-4px;opacity:0}
+			@media print{
+				body{background:0 0}
+				.element{clip-path:inset(0 0 0 0)}
+				.noPrint,#clr,#chck,#shade,#visuel,#progress{display:none}
+				.red{border:0}
+				#doc{width:100%}
+				#page{box-shadow:0 0}
+				#texture{opacity:0}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="visuel"><img id="visuel_img" src="https://leblog92.github.io/ddcf_media/visuels/0.png"/></div>
+		<div id="shade"></div>
+		<div class="noPrint">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 318 83" width="199px" height="52px">
+					<defs>
+						<filter height="200%" width="200%" y="-50%" x="-50%" id="blur">
+							<feGaussianBlur stdDeviation="7" in="SourceGraphic"/>
+						</filter>
+						<mask id="hide">
+							<rect width="318" height="82" fill="#000"/>
+							<g fill="#fff">
+								<path id="title" d="M 0.00,0.00 C 0.00,0.00 41.00,0.00 41.00,0.00 51.62,0.13 60.65,2.69 67.79,11.00 72.63,16.64 74.13,22.86 75.13,30.00 76.98,43.16 76.42,61.74 66.90,71.98 59.11,80.36 49.93,81.98 39.00,82.00 39.00,82.00 0.00,82.00 0.00,82.00 0.00,82.00 0.00,29.00 0.00,29.00 0.00,29.00 23.00,29.00 23.00,29.00 23.00,29.00 23.00,49.00 23.00,49.00 23.01,51.54 22.68,55.48 24.60,57.40 27.90,60.70 43.21,59.06 46.81,56.30 54.31,50.58 54.40,32.69 47.66,26.42 43.84,22.85 38.85,23.01 34.00,23.00 34.00,23.00 0.00,23.00 0.00,23.00 0.00,23.00 0.00,0.00 0.00,0.00 Z M 81.00,0.00 C 81.00,0.00 122.00,0.00 122.00,0.00 132.62,0.13 141.65,2.69 148.79,11.00 153.63,16.64 155.13,22.86 156.13,30.00 157.98,43.16 157.42,61.74 147.90,71.98 140.11,80.36 130.93,81.98 120.00,82.00 120.00,82.00 81.00,82.00 81.00,82.00 81.00,82.00 81.00,29.00 81.00,29.00 81.00,29.00 104.00,29.00 104.00,29.00 104.00,29.00 104.00,49.00 104.00,49.00 104.01,51.54 103.68,55.48 105.60,57.40 108.90,60.70 124.21,59.06 127.81,56.30 135.31,50.58 135.40,32.69 128.66,26.42 124.84,22.85 119.85,23.01 115.00,23.00 115.00,23.00 81.00,23.00 81.00,23.00 81.00,23.00 81.00,0.00 81.00,0.00 Z M 242.00,56.00 C 240.20,62.16 237.49,65.48 232.99,69.99 220.39,82.58 200.98,85.69 185.00,77.62 171.37,70.75 163.01,56.05 163.01,41.00 163.01,25.95 171.37,11.25 185.00,4.38 200.98,-3.69 220.39,-0.58 232.99,12.01 237.49,16.52 240.20,19.84 242.00,26.00 242.00,26.00 220.00,35.00 220.00,35.00 218.25,31.74 216.95,29.75 213.98,27.39 201.35,17.33 187.47,29.69 186.64,40.00 186.09,46.76 191.25,53.55 197.00,56.56 202.91,59.65 208.83,58.65 213.99,54.61 216.38,52.73 219.12,48.84 222.09,48.52 224.91,48.23 237.66,54.76 242.00,56.00 Z M 248.00,0.00 C 248.00,0.00 318.00,0.00 318.00,0.00 318.00,0.00 318.00,23.00 318.00,23.00 318.00,23.00 248.00,23.00 248.00,23.00 248.00,23.00 248.00,0.00 248.00,0.00 Z M 248.00,29.00 C 248.00,29.00 306.00,29.00 306.00,29.00 306.00,29.00 306.00,52.00 306.00,52.00 306.00,52.00 280.00,52.00 280.00,52.00 280.00,52.00 272.60,53.60 272.60,53.60 272.60,53.60 271.00,62.00 271.00,62.00 271.00,62.00 271.00,82.00 271.00,82.00 271.00,82.00 248.00,82.00 248.00,82.00 248.00,82.00 248.00,29.00 248.00,29.00 Z"/>
+							</g>
+						</mask>
+					</defs>
+					<g style="mask:url(#hide)">
+						<g filter="url(#blur)">
+							<image width="318" height="82" xlink:href="https://leblog92.github.io/ddcf_media/rainbow.gif" preserveAspectRatio="none"/>
+							<image x="-317" width="318" height="82" xlink:href="https://leblog92.github.io/ddcf_media/rainbow.gif" preserveAspectRatio="none"/>
+							<animateMotion begin="0s" dur="6s" repeatCount="indefinite" values="0,0;318,0"/>
+						</g> 
+						<!-- <rect width="318" height="82"/> -->
+					</g>
+				</svg><br>
+			Demande De Congé Facilitée<sup>©</sup><br><br>
+			<select id="who" onchange="fill_name();">
+				<option>--Veuillez choisir--</option>
+				<option>Alice TAVERNY</option>
+				<option>Anh-Mai CATALAN</option>
+				<option>Anne-Valérie LALLEMAND</option>
+				<option>Aurélie POULARD</option>
+				<option>Aurélie GODEFROY</option>
+				<option>Aurélie HAMMOUDI</option>
+				<option>Béatrice BRANELLEC</option>
+				<option>Bruno BOISSEL</option>
+				<option>Camille BARRÉ</option>
+				<option>Catherine CONSTANT</option>
+				<option>Claire DUSART</option>
+				<option>Claire FAYAU</option>
+				<option>Clara BERLINER</option>
+				<option>Chloé GRÈZE</option>
+				<option>Chourouk AFOUKATI</option>
+				<option>Denise POPOFF</option>
+				<option>Didier GUISELIN</option>
+				<option>Edward LUTHERER</option>
+				<option>Elisabeth DELMÉE</option>
+				<option>Franck LEMÉLEDO</option>
+				<option>Françoise LÉGER</option>
+				<option>Frédérique BLOEME</option>
+				<option>Grégory BOURJOT</option>
+				<option>Hélène LEDEMÉ</option>
+				<option>Ivano LORENZONI</option>
+				<option>Joanne FAISSE</option>
+				<option>John CHAUVIN</option>
+				<option>Juan Carlos ANDIA</option>
+				<option>Loïc RIBON</option>
+				<option>Luc LAFON</option>
+				<option>Marianne RUHM</option>
+				<option>Marie PAUTRE</option>
+				<option>Marie-Line MUSSET</option>
+				<option>Marie-Odile CAILLET</option>
+				<option>Marine LANNURIEN</option>
+				<option>Martine AUGUY</option>
+				<option>Martine LAURENT</option>
+				<option>Matthieu KLEIN</option>
+				<option>Mayrine EVRARD</option>
+				<option>Monique BOURDEILH</option>
+				<option>Nathalie FÉQUANT</option>
+				<option>Nathalie TUGÈNE</option>
+				<option>Nathalie HANNA-MORELLINI</option>
+				<option>Nicolas JODIN</option>
+				<option>Olivier GARSON</option>
+				<option>Pascal DESROSIERS</option>
+				<option>Pascale OHANA</option>
+				<option>Patricia MAHRI</option>
+				<option>Sylvie PAZ</option>
+				<option>Radouan ATIKI</option>
+				<option>Sabine FRASZCZAK</option>
+				<option>Sonia NARDOUX</option>
+				<option>Tamara SERPINSKY</option>
+				<option>Violette DUPONT</option>
+				<option>Zacharie CARON</option>
+			</select><br><br>
+			<div>
+				départ <input type="date" id="input_depart" onchange="fill_depart();"><br><br>
+				reprise <input type="date" id="input_reprise" onchange="fill_reprise();"><br><br>
+				<button onclick="window.print();" onmouseover="show_cat();" onmouseleave="hide_cat();">Imprimer</button><br><br>
+				<img id="cat_pic" src="https://leblog92.github.io/ddcf_media/wait.gif" onclick="random_cat();"/>
+			</div>
+		</div>
+		<div id="page" class="element">
+			<img src="https://leblog92.github.io/ddcf_media/doc.jpg" id="doc"/>
+			<img src="https://leblog92.github.io/ddcf_media/crumbled.png" id="texture"/>
+			<canvas id="canvas" class="red"></canvas>
+			<canvas id="canvas2"></canvas>
+			<div id="service" contenteditable="true" class="red">Médiathèque</div>
+			<div id="service2">Médiathèque</div>
+			<div id="code" contenteditable="true" class="red"></div>
+			<div id="code2"></div>
+			<div id="nom" contenteditable="true" class="red"></div>
+			<div id="nom2"></div>
+			<div id="prenom" contenteditable="true" class="red"></div>
+			<div id="prenom2"></div>
+			<div id="depart" contenteditable="true" class="red"></div>
+			<div id="depart2"></div>
+			<div id="reprise" contenteditable="true" class="red"></div>
+			<div id="reprise2"></div>
+			<div id="conge" class="red" onclick="check_conge();">X</div>
+			<div id="conge2">X</div>
+			<div id="absence" class="red" onclick="check_absence();"></div>
+			<div id="absence2"></div>
+			<div id="observations" contenteditable="true" class="red"></div>
+			<div id="observations2"></div>
+	        <input type="button" value="effacer" id="clr" onclick="erase()">
+			<div id="date" contenteditable="true"></div>
+		</div>
+		<div id="progress"></div>
+		<script type="text/javascript" src="ddcf_script.js"></script>
+	</body>
+</html>
